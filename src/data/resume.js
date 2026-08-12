@@ -4,11 +4,12 @@ import { Technology } from '../models/Technology.js'
 import { Project } from '../models/Project.js'
 import { EducationEntry } from '../models/EducationEntry.js'
 import { LocalizedText } from '../models/LocalizedText.js'
+import { baseUrl } from '../utils/baseUrl.js'
 
 export const profile = new Profile({
   name: 'Simón Salamanca',
   location: 'Bogotá, DC',
-  photo: '/files/profile.jpg',
+  photo: `${baseUrl}files/profile.jpg`,
   contact: new Contact({
     phone: '+57 305 933 5354',
     email: 'simonsalamancatrab@gmail.com',

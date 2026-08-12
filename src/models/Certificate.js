@@ -1,4 +1,5 @@
 import { LocalizedText } from './LocalizedText.js'
+import { baseUrl } from '../utils/baseUrl.js'
 
 const BADGE_CLASSES = {
   Cisco: 'bg-sky-100 text-sky-700 dark:bg-sky-500/15 dark:text-sky-300',
@@ -24,7 +25,7 @@ export class Certificate {
   }
 
   url() {
-    return `/files/${encodeURI(this.file)}`
+    return `${baseUrl}files/${encodeURI(this.file)}`
   }
 
   downloadName() {
