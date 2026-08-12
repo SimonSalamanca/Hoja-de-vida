@@ -6,6 +6,8 @@ export const translations = {
       skills: 'Habilidades',
       projects: 'Proyectos',
       education: 'Educación',
+      open: 'Abrir menú',
+      close: 'Cerrar menú',
     },
     hero: {
       subtitle: 'Ingeniero de Software',
@@ -51,6 +53,8 @@ export const translations = {
       skills: 'Skills',
       projects: 'Projects',
       education: 'Education',
+      open: 'Open menu',
+      close: 'Close menu',
     },
     hero: {
       subtitle: 'Software Engineer',
