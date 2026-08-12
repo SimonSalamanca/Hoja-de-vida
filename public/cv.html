@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simón Salamanca — Hoja de vida</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, "Times New Roman", Times, serif;
+      background: #e5e7eb;
+      color: #111;
+      line-height: 1.5;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Toolbar (on-screen only) */
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #1f2937;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    }
+    .toolbar button,
+    .toolbar a {
+      font-family: inherit;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid #4b5563;
+      background: #374151;
+      color: #f9fafb;
+      padding: 8px 18px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .toolbar button:hover,
+    .toolbar a:hover { background: #4b5563; }
+    .toolbar button.print { background: #b45309; border-color: #b45309; font-weight: bold; }
+    .toolbar button.print:hover { background: #d97706; }
+
+    /* A4 page */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 24px auto;
+      background: #fff;
+      padding: 18mm 20mm;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Header */
+    .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding-bottom: 14px; border-bottom: 3px solid #111; }
+    .head h1 { font-size: 30px; letter-spacing: 1px; text-transform: uppercase; }
+    .head .role { font-size: 15px; font-weight: bold; margin-top: 4px; }
+    .head .contact { font-size: 11px; text-align: right; line-height: 1.6; color: #222; }
+
+    /* Sections */
+    section { margin-top: 16px; }
+    h2 {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #999;
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+    }
+    p { font-size: 12.5px; text-align: justify; }
+    .item { margin-bottom: 8px; }
+    .item .title-row { display: flex; justify-content: space-between; align-items: baseline; }
+    .item .title { font-size: 13px; font-weight: bold; }
+    .item .sub { font-size: 11.5px; color: #333; }
+    .item .date { font-size: 11px; color: #333; font-style: italic; white-space: nowrap; }
+    ul { margin: 4px 0 0 18px; }
+    li { font-size: 12.5px; }
+
+    /* Two-column skills */
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+
+    /* Certificates compact */
+    .certs { column-count: 2; column-gap: 28px; }
+    .certs li { font-size: 11.5px; margin-bottom: 3px; break-inside: avoid; }
+
+    .soft { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 4px; }
+    .soft li { list-style: none; font-size: 12px; }
+    .soft li::before { content: "• "; }
+
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none !important; }
+      .page { box-shadow: none; margin: 0; width: auto; min-height: auto; padding: 0; }
+      section { break-inside: avoid; }
+    }
+    @page { size: A4; margin: 14mm; }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button class="print" onclick="window.print()">Imprimir / Guardar como PDF</button>
+    <a href="./">← Volver al CV web</a>
+  </div>
+  <main id="cv" class="page"></main>
+
+  <script>
+    window.__CV_DATA__ = {"translations":{"es":{"nav":{"home":"Inicio","about":"Perfil","skills":"Habilidades","projects":"Proyectos","education":"Educación"},"hero":{"subtitle":"Ingeniero de Software","tagline":"Desarrollo web · APIs · Ciberseguridad","download":"Descargar CV (PDF)","available":"Disponible para oportunidades"},"about":{"title":"Perfil","text":"Ingeniero de Software en formación (7.º semestre) con experiencia en desarrollo de aplicaciones web y trabajo colaborativo bajo metodologías ágiles. Con conocimientos en Python, Java, C#, JavaScript, bases de datos SQL, desarrollo de APIs y control de versiones con GitHub. Orientado a la resolución de problemas, aprendizaje continuo y capacidad para trabajo individual como en equipo."},"skills":{"title":"Habilidades","lead":"Lenguajes y herramientas","soft":"Habilidades blandas"},"projects":{"title":"Proyectos"},"education":{"title":"Educación","certificates":"Certificados","filterAll":"Todos","view":"Ver certificado","open":"Abrir en nueva pestaña","download":"Descargar","close":"Cerrar","inProgress":"en curso"},"footer":{"text":"Hecho con React · Tailwind CSS"},"theme":{"light":"Cambiar a modo claro","dark":"Cambiar a modo oscuro"},"language":"Cambiar idioma"},"en":{"nav":{"home":"Home","about":"Profile","skills":"Skills","projects":"Projects","education":"Education"},"hero":{"subtitle":"Software Engineer","tagline":"Web Development · APIs · Cybersecurity","download":"Download CV (PDF)","available":"Open to opportunities"},"about":{"title":"Profile","text":"Software Engineering student (7th semester) with experience in web application development and collaborative work under agile methodologies. Knowledgeable in Python, Java, C#, JavaScript, SQL databases, API development and version control with GitHub. Problem-solving oriented, committed to continuous learning and able to work both individually and in teams."},"skills":{"title":"Skills","lead":"Languages & tools","soft":"Soft skills"},"projects":{"title":"Projects"},"education":{"title":"Education","certificates":"Certificates","filterAll":"All","view":"View certificate","open":"Open in new tab","download":"Download","close":"Close","inProgress":"in progress"},"footer":{"text":"Built with React · Tailwind CSS"},"theme":{"light":"Switch to light mode","dark":"Switch to dark mode"},"language":"Change language"}},"profile":{"name":"Simón Salamanca","location":"Bogotá, DC","contact":{"phone":"+57 305 933 5354","email":"simonsalamancatrab@gmail.com","linkedin":"https://www.linkedin.com/in/sim%C3%B3n-salamanca-vargas","github":"https://github.com/SimonSalamanca"}},"technologies":["Python","Java","C#","JavaScript","React","CSS","MySQL","PostgreSQL","Unity","GitHub","Figma","Jira","Power BI"],"softSkills":{"es":["Trabajo colaborativo","Resolución de problemas","Aprendizaje autónomo","Adaptabilidad","Comunicación asertiva"],"en":["Teamwork","Problem solving","Self-directed learning","Adaptability","Assertive communication"]},"projects":{"es":[{"title":"Proyecto Ludex — Plataforma E-commerce","highlights":["Desarrollo colaborativo de una plataforma web","Trabajo bajo metodología Scrum","Uso de GitHub para control de versiones","Aplicación de buenas prácticas de desarrollo","Diseño de páginas web"]},{"title":"Consultorías a PYMES","highlights":["Análisis, planeación y construcción de soluciones web a medida para el usuario"]}],"en":[{"title":"Ludex Project — E-commerce Platform","highlights":["Collaborative development of a web platform","Work under Scrum methodology","GitHub for version control","Application of development best practices","Web page design"]},{"title":"SME Consultancies","highlights":["Analysis, planning and building of tailor-made web solutions for the client"]}]},"education":{"es":{"degree":"Ingeniería de Software","school":"Universidad Manuela Beltrán","status":"7.º semestre — en curso"},"en":{"degree":"Software Engineering","school":"Universidad Manuela Beltrán","status":"7th semester — in progress"}},"certificates":[{"title":{"es":"CCNA: Switching, Routing, and Wireless Essentials","en":"CCNA: Switching, Routing, and Wireless Essentials"},"issuer":"Cisco Networking Academy"},{"title":{"es":"Introduction to Cybersecurity","en":"Introduction to Cybersecurity"},"issuer":"Cisco Networking Academy"},{"title":{"es":"Linux Unhatched","en":"Linux Unhatched"},"issuer":"Cisco Networking Academy"},{"title":{"es":"Linux Essentials","en":"Linux Essentials"},"issuer":"Cisco Networking Academy"},{"title":{"es":"Operating System Support","en":"Operating System Support"},"issuer":"Cisco Networking Academy"},{"title":{"es":"Ruta de aprendizaje: Administrar recursos","en":"Learning Path: Administer resources"},"issuer":"Microsoft"},{"title":{"es":"Ruta de aprendizaje: Análisis de datos","en":"Learning Path: Data analysis"},"issuer":"Microsoft"},{"title":{"es":"Ruta de aprendizaje: Almacenamiento de datos","en":"Learning Path: Data warehousing"},"issuer":"Microsoft"},{"title":{"es":"Ruta de aprendizaje: Infraestructura en la nube","en":"Learning Path: Cloud infrastructure"},"issuer":"Microsoft"},{"title":{"es":"Ruta de aprendizaje: Visualización de datos","en":"Learning Path: Data visualization"},"issuer":"Microsoft"},{"title":{"es":"Ruta de aprendizaje: Windows PowerShell","en":"Learning Path: Windows PowerShell"},"issuer":"Microsoft"},{"title":{"es":"CSS","en":"CSS"},"issuer":"SoloLearn"},{"title":{"es":"JavaScript","en":"JavaScript"},"issuer":"SoloLearn"},{"title":{"es":"Programación Web — DevSeniorCode","en":"Web Development — DevSeniorCode"},"issuer":"DevSeniorCode"}]};
+  </script>
+  <script>
+    const DATA = window.__CV_DATA__;
+    const lang = new URLSearchParams(window.location.search).get("lang") === "en" ? "en" : "es";
+    const C = DATA.translations[lang];
+    const get = (x) => (x && typeof x === "object" && "es" in x ? x[lang] : x);
+    const prettyUrl = (u) => decodeURIComponent(u.replace(/^https?:\/\/(www\.)?/, ""));
+
+    const tech = DATA.technologies;
+    const soft = DATA.softSkills[lang];
+    const projects = DATA.projects[lang];
+    const edu = DATA.education[lang];
+    const certs = DATA.certificates;
+    const role = C.hero.subtitle + " · " + C.hero.tagline;
+    const joinList = (arr) => arr.map((x) => "<li>" + x + "</li>").join("");
+
+    document.documentElement.lang = lang;
+    document.title = "Simón Salamanca — " + (lang === "es" ? "Hoja de vida" : "Curriculum Vitae");
+
+    document.getElementById("cv").innerHTML = `
+      <header class="head">
+        <div>
+          <h1>${DATA.profile.name}</h1>
+          <div class="role">${role}</div>
+        </div>
+        <div class="contact">
+          <div>${DATA.profile.contact.phone}</div>
+          <div>${DATA.profile.contact.email}</div>
+          <div>${DATA.profile.location}</div>
+          <div>LinkedIn: ${prettyUrl(DATA.profile.contact.linkedin)}</div>
+          <div>GitHub: ${prettyUrl(DATA.profile.contact.github)}</div>
+        </div>
+      </header>
+
+      <section>
+        <h2>${C.about.title}</h2>
+        <p>${C.about.text}</p>
+      </section>
+
+      <section>
+        <h2>${C.education.title}</h2>
+        <div class="item">
+          <div class="title-row">
+            <span class="title">${edu.degree}</span>
+            <span class="date">${edu.status}</span>
+          </div>
+          <div class="sub">${edu.school}</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>${C.skills.title}</h2>
+        <div class="cols">
+          <div>
+            <div class="sub" style="margin-bottom:4px"><strong>${C.skills.lead}</strong></div>
+            <ul>${joinList(tech)}</ul>
+          </div>
+          <div>
+            <div class="sub" style="margin-bottom:4px"><strong>${C.skills.soft}</strong></div>
+            <ul class="soft">${joinList(soft)}</ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>${C.projects.title}</h2>
+        ${projects
+          .map(
+            (p) => `
+              <div class="item">
+                <div class="title">${p.title}</div>
+                <ul>${joinList(p.highlights)}</ul>
+              </div>`
+          )
+          .join("")}
+      </section>
+
+      <section>
+        <h2>${C.education.certificates} (${certs.length})</h2>
+        <ul class="certs">
+          ${certs.map((c) => "<li>" + get(c.title) + " — " + c.issuer + "</li>").join("")}
+        </ul>
+      </section>
+    `;
+
+    window.addEventListener("load", () => {
+      setTimeout(() => window.print(), 400);
+    });
+  </script>
+</body>
+</html>

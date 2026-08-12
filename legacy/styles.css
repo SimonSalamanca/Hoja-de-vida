@@ -1,0 +1,89 @@
+:root{
+  --bg-1: #fff;
+  --accent-1: #7b1fa2;
+  --accent-2: #ff8a65;
+  --accent-3: #02413a;
+  --muted: #82888d;
+  --glass: rgba(255,255,255,0.86);
+  --radius: 12px;
+  --gap: 12px;
+  --profile-size: 200px; /* <-- cambia aquí el tamaño de la imagen en HOME */
+}
+
+/* Reset */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Roboto, Arial, sans-serif;color:#111;background:linear-gradient(135deg, rgba(123,31,162,0.04), rgba(38,166,154,0.03));}
+
+/* HEADER fixed */
+#site-header{position:fixed;top:12px;left:12px;right:12px;z-index:60}
+.container.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;backdrop-filter:blur(6px);background:var(--glass);border-radius:14px;padding:10px 14px;box-shadow:0 10px 30px rgba(16,24,40,0.12)}
+.brand{display:flex;align-items:center;gap:12px}
+.avatar{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));display:inline-grid;place-items:center;color:white;font-weight:700}
+.brand-name{font-weight:700}
+.muted{color:var(--muted);font-size:13px}
+
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:8px}
+nav a{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:500}
+nav a .material-icons{font-size:18px}
+nav a.active{background:rgba(123,31,162,0.08);color:var(--accent-1);box-shadow:inset 0 -2px 0 rgba(0,0,0,0.02)}
+
+/* main top offset so fixed header doesn't cover content */
+main{padding-top:120px}
+
+/* HERO (fusion contact) */
+.hero-section .hero-bg{ /* ahora limitado al ancho de .container */
+  background:linear-gradient(180deg, rgba(185, 65, 245, 0.95), rgba(185, 65, 245, 0.92));
+  color:white;padding:40px;border-radius:18px;margin-bottom:18px;
+}
+.hero-inner{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+#profile-photo{width:var(--profile-size);height:var(--profile-size);border-radius:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.08)}
+.hero-name{font-size:32px;font-weight:800;letter-spacing:1px}
+.hero-title{color:rgba(255,255,255,0.85);margin-top:-4px}
+.contact-row{display:flex;gap:18px;align-items:center;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.contact-item{display:inline-flex;align-items:center;gap:8px;color:var(--accent-3);text-decoration:none;background:rgba(0,0,0,0.04);padding:8px 12px;border-radius:999px}
+.contact-item .material-icons{font-size:18px;color:var(--accent-3)}
+.hero-location{margin-top:12px;color:rgba(255,255,255,0.8)}
+
+/* Sections */
+.section{padding:28px 0}
+.container{max-width:980px;margin:0 auto;padding:0 18px}
+h2{display:flex;align-items:center;gap:10px;color:var(--accent-1);margin-bottom:8px}
+.lead{color:var(--muted)}
+
+/* CAROUSEL */
+.carousel-wrap{position:relative;margin-top:18px}
+.carousel{overflow:hidden;border-radius:10px}
+.carousel-track{display:flex;gap:12px;transition:transform 360ms cubic-bezier(.2,.9,.3,1)}
+.tech{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;background:linear-gradient(180deg,#fff,#fafafa);border-radius:10px;min-height:110px;flex:0 0 220px;text-align:center}
+.tech img{max-width:70%;max-height:48px;margin-bottom:8px}
+.tech-name{font-weight:600;color:var(--muted);font-size:13px}
+.carousel-controls{position:absolute;top:50%;transform:translateY(-50%);left:8px;right:8px;display:flex;justify-content:space-between;pointer-events:none}
+.btn-small{pointer-events:auto;background:white;border-radius:999px;padding:8px 10px;border:1px solid rgba(0,0,0,0.06);cursor:pointer;box-shadow:0 6px 18px rgba(16,24,40,0.06)}
+
+/* List items */
+.list{display:grid;gap:12px}
+.item{background:white;padding:14px;border-radius:10px;box-shadow:0 6px 20px rgba(16,24,40,0.04)}
+.certs a{color:var(--accent-1);text-decoration:none;font-weight:600}
+
+/* CERT GRID */
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.cert-item{background:white;padding:8px;border-radius:8px;box-shadow:0 6px 18px rgba(16,24,40,0.05)}
+.cert-item embed{border-radius:6px}
+.cert-meta{margin-top:8px;text-align:center}
+
+/* Responsive adjustments */
+@media (max-width:980px){
+  .tech{flex-basis:190px}
+  .cert-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:700px){
+  nav ul{display:none}
+  .hero-name{font-size:26px}
+  main{padding-top:110px}
+  .tech{flex-basis:calc(50% - 12px)}
+  .cert-grid{grid-template-columns:1fr}
+}
+@media (max-width:420px){
+  .hero-inner{padding:8px}
+  .contact-row{gap:8px}
+}

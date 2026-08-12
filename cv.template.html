@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simón Salamanca — Hoja de vida</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, "Times New Roman", Times, serif;
+      background: #e5e7eb;
+      color: #111;
+      line-height: 1.5;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Toolbar (on-screen only) */
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #1f2937;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    }
+    .toolbar button,
+    .toolbar a {
+      font-family: inherit;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid #4b5563;
+      background: #374151;
+      color: #f9fafb;
+      padding: 8px 18px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .toolbar button:hover,
+    .toolbar a:hover { background: #4b5563; }
+    .toolbar button.print { background: #b45309; border-color: #b45309; font-weight: bold; }
+    .toolbar button.print:hover { background: #d97706; }
+
+    /* A4 page */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 24px auto;
+      background: #fff;
+      padding: 18mm 20mm;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Header */
+    .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding-bottom: 14px; border-bottom: 3px solid #111; }
+    .head h1 { font-size: 30px; letter-spacing: 1px; text-transform: uppercase; }
+    .head .role { font-size: 15px; font-weight: bold; margin-top: 4px; }
+    .head .contact { font-size: 11px; text-align: right; line-height: 1.6; color: #222; }
+
+    /* Sections */
+    section { margin-top: 16px; }
+    h2 {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #999;
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+    }
+    p { font-size: 12.5px; text-align: justify; }
+    .item { margin-bottom: 8px; }
+    .item .title-row { display: flex; justify-content: space-between; align-items: baseline; }
+    .item .title { font-size: 13px; font-weight: bold; }
+    .item .sub { font-size: 11.5px; color: #333; }
+    .item .date { font-size: 11px; color: #333; font-style: italic; white-space: nowrap; }
+    ul { margin: 4px 0 0 18px; }
+    li { font-size: 12.5px; }
+
+    /* Two-column skills */
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+
+    /* Certificates compact */
+    .certs { column-count: 2; column-gap: 28px; }
+    .certs li { font-size: 11.5px; margin-bottom: 3px; break-inside: avoid; }
+
+    .soft { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 4px; }
+    .soft li { list-style: none; font-size: 12px; }
+    .soft li::before { content: "• "; }
+
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none !important; }
+      .page { box-shadow: none; margin: 0; width: auto; min-height: auto; padding: 0; }
+      section { break-inside: avoid; }
+    }
+    @page { size: A4; margin: 14mm; }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button class="print" onclick="window.print()">Imprimir / Guardar como PDF</button>
+    <a href="./">← Volver al CV web</a>
+  </div>
+  <main id="cv" class="page"></main>
+
+  <script>
+    window.__CV_DATA__ = /*__CV_DATA__*/;
+  </script>
+  <script>
+    const DATA = window.__CV_DATA__;
+    const lang = new URLSearchParams(window.location.search).get("lang") === "en" ? "en" : "es";
+    const C = DATA.translations[lang];
+    const get = (x) => (x && typeof x === "object" && "es" in x ? x[lang] : x);
+    const prettyUrl = (u) => decodeURIComponent(u.replace(/^https?:\/\/(www\.)?/, ""));
+
+    const tech = DATA.technologies;
+    const soft = DATA.softSkills[lang];
+    const projects = DATA.projects[lang];
+    const edu = DATA.education[lang];
+    const certs = DATA.certificates;
+    const role = C.hero.subtitle + " · " + C.hero.tagline;
+    const joinList = (arr) => arr.map((x) => "<li>" + x + "</li>").join("");
+
+    document.documentElement.lang = lang;
+    document.title = "Simón Salamanca — " + (lang === "es" ? "Hoja de vida" : "Curriculum Vitae");
+
+    document.getElementById("cv").innerHTML = `
+      <header class="head">
+        <div>
+          <h1>${DATA.profile.name}</h1>
+          <div class="role">${role}</div>
+        </div>
+        <div class="contact">
+          <div>${DATA.profile.contact.phone}</div>
+          <div>${DATA.profile.contact.email}</div>
+          <div>${DATA.profile.location}</div>
+          <div>LinkedIn: ${prettyUrl(DATA.profile.contact.linkedin)}</div>
+          <div>GitHub: ${prettyUrl(DATA.profile.contact.github)}</div>
+        </div>
+      </header>
+
+      <section>
+        <h2>${C.about.title}</h2>
+        <p>${C.about.text}</p>
+      </section>
+
+      <section>
+        <h2>${C.education.title}</h2>
+        <div class="item">
+          <div class="title-row">
+            <span class="title">${edu.degree}</span>
+            <span class="date">${edu.status}</span>
+          </div>
+          <div class="sub">${edu.school}</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>${C.skills.title}</h2>
+        <div class="cols">
+          <div>
+            <div class="sub" style="margin-bottom:4px"><strong>${C.skills.lead}</strong></div>
+            <ul>${joinList(tech)}</ul>
+          </div>
+          <div>
+            <div class="sub" style="margin-bottom:4px"><strong>${C.skills.soft}</strong></div>
+            <ul class="soft">${joinList(soft)}</ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>${C.projects.title}</h2>
+        ${projects
+          .map(
+            (p) => `
+              <div class="item">
+                <div class="title">${p.title}</div>
+                <ul>${joinList(p.highlights)}</ul>
+              </div>`
+          )
+          .join("")}
+      </section>
+
+      <section>
+        <h2>${C.education.certificates} (${certs.length})</h2>
+        <ul class="certs">
+          ${certs.map((c) => "<li>" + get(c.title) + " — " + c.issuer + "</li>").join("")}
+        </ul>
+      </section>
+    `;
+
+    window.addEventListener("load", () => {
+      setTimeout(() => window.print(), 400);
+    });
+  </script>
+</body>
+</html>
