@@ -46,12 +46,25 @@ export const projects = [
   new Project({
     id: 'ludex',
     title: { es: 'Proyecto Ludex — Plataforma E-commerce', en: 'Ludex Project — E-commerce Platform' },
+    url: 'https://github.com/Cristianmoreno25/Ludex',
     highlights: [
       { es: 'Desarrollo colaborativo de una plataforma web', en: 'Collaborative development of a web platform' },
       { es: 'Trabajo bajo metodología Scrum', en: 'Work under Scrum methodology' },
       { es: 'Uso de GitHub para control de versiones', en: 'GitHub for version control' },
       { es: 'Aplicación de buenas prácticas de desarrollo', en: 'Application of development best practices' },
       { es: 'Diseño de páginas web', en: 'Web page design' },
+    ],
+  }),
+  new Project({
+    id: 'cv-site',
+    title: { es: 'Mi hoja de vida — CV en línea', en: 'My résumé — Online CV' },
+    url: 'https://github.com/SimonSalamanca/Hoja-de-vida',
+    highlights: [
+      { es: 'SPA construida con React y Vite', en: 'SPA built with React and Vite' },
+      { es: 'Diseño responsive con Tailwind CSS', en: 'Responsive design with Tailwind CSS' },
+      { es: 'Modo oscuro/claro y selector de idioma ES/EN', en: 'Dark/light mode and ES/EN language selector' },
+      { es: 'Descarga del CV en PDF', en: 'CV download as PDF' },
+      { es: 'Galería de certificados con filtros', en: 'Certificate gallery with filters' },
     ],
   }),
   new Project({
