@@ -137,7 +137,11 @@
           <div class="role">${role}</div>
         </div>
         <div class="contact">
-          <div>${DATA.profile.contact.phone}</div>
+          <div>
+            <a href="https://wa.me/${DATA.profile.contact.phone.replace(/[^\d]/g, '')}?text=${encodeURIComponent(lang === 'es' ? 'Hola Simón, me gustaría contactarte.' : 'Hi Simón, I would like to get in touch.')}" target="_blank" rel="noopener noreferrer">
+              ${DATA.profile.contact.phone}
+            </a>
+          </div>
           <div>${DATA.profile.contact.email}</div>
           <div>${DATA.profile.location}</div>
           <div>LinkedIn: ${prettyUrl(DATA.profile.contact.linkedin)}</div>

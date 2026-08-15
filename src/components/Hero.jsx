@@ -7,6 +7,10 @@ export default function Hero() {
 
   const handlePrint = () => window.open(`./cv.html?lang=${lang}`, '_blank', 'noopener')
 
+  const whatsappHref = `${profile.contact.whatsappHref}?text=${encodeURIComponent(
+    lang === 'es' ? 'Hola Simón, me gustaría contactarte.' : 'Hi Simón, I would like to get in touch.',
+  )}`
+
   return (
     <section id="home" className="relative overflow-hidden">
       <div
@@ -47,7 +51,9 @@ export default function Hero() {
         <ScrollReveal delay={240}>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
             <a
-              href={profile.contact.phoneHref}
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-ink-700 shadow-sm transition-colors hover:border-primary-400 hover:text-primary-700 dark:border-ink-700 dark:bg-ink-900 dark:text-ink-100 dark:hover:border-primary-500 dark:hover:text-primary-300"
             >
               <PhoneIcon /> {profile.contact.phone}
